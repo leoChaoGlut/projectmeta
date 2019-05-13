@@ -1,2 +1,2 @@
-# maven-project-analyzer
-maven-project-analyzer
+# maven-project-metadata
+maven-project-metadata
