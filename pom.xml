@@ -6,10 +6,16 @@
 
     <groupId>personal.leo</groupId>
     <artifactId>maven-project-metadata</artifactId>
+    <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
-
+    <modules>
+        <module>projectmeta-maven-plugin</module>
+        <module>projectmeta-executor</module>
+    </modules>
 
     <dependencies>
+
+        <!--        -->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
@@ -19,21 +25,6 @@
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>4.12</version>
-        </dependency>
-        <dependency>
-            <groupId>io.github.benas</groupId>
-            <artifactId>random-beans</artifactId>
-            <version>3.8.0</version>
-        </dependency>
-        <dependency>
-            <groupId>org.dom4j</groupId>
-            <artifactId>dom4j</artifactId>
-            <version>2.1.1</version>
-        </dependency>
-        <dependency>
-            <groupId>jaxen</groupId>
-            <artifactId>jaxen</artifactId>
-            <version>1.2.0</version>
         </dependency>
         <dependency>
             <groupId>org.apache.commons</groupId>
@@ -53,8 +44,9 @@
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
-            <version>1.2.56</version>
+            <version>1.2.58</version>
         </dependency>
+
     </dependencies>
 
 
@@ -63,12 +55,13 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.1</version>
+                <version>3.8.1</version>
                 <configuration>
                     <source>1.8</source>
                     <target>1.8</target>
                 </configuration>
             </plugin>
+
         </plugins>
     </build>
 </project>
