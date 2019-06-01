@@ -1,63 +1,63 @@
-mvn personal.leo:projectmeta-maven-plugin:step1 -f dataphin-auth/pom.xml
-mvn personal.leo:projectmeta-maven-plugin:step1 -f dataphin-benchmark/pom.xml
-mvn personal.leo:projectmeta-maven-plugin:step1 -f dataphin-blackbox/pom.xml
-mvn personal.leo:projectmeta-maven-plugin:step1 -f dataphin-bpms/pom.xml
-mvn personal.leo:projectmeta-maven-plugin:step1 -f dataphin-dipmc/pom.xml
-mvn personal.leo:projectmeta-maven-plugin:step1 -f dataphin-ide/pom.xml
-mvn personal.leo:projectmeta-maven-plugin:step1 -f dataphin-log/pom.xml
-mvn personal.leo:projectmeta-maven-plugin:step1 -f dataphin-metacenter/pom.xml
-mvn personal.leo:projectmeta-maven-plugin:step1 -f dataphin-oneid/pom.xml
-mvn personal.leo:projectmeta-maven-plugin:step1 -f dataphin-oneservice/pom.xml
-mvn personal.leo:projectmeta-maven-plugin:step1 -f dataphin-quasimodo/pom.xml
-mvn personal.leo:projectmeta-maven-plugin:step1 -f dataphin-rs/pom.xml
-mvn personal.leo:projectmeta-maven-plugin:step1 -f dataphin-voldemort/pom.xml
+mvn personal.leo:projectmeta-maven-plugin:step1 -f leo-auth/pom.xml
+mvn personal.leo:projectmeta-maven-plugin:step1 -f leo-benchmark/pom.xml
+mvn personal.leo:projectmeta-maven-plugin:step1 -f leo-blackbox/pom.xml
+mvn personal.leo:projectmeta-maven-plugin:step1 -f leo-bpms/pom.xml
+mvn personal.leo:projectmeta-maven-plugin:step1 -f leo-dipmc/pom.xml
+mvn personal.leo:projectmeta-maven-plugin:step1 -f leo-ide/pom.xml
+mvn personal.leo:projectmeta-maven-plugin:step1 -f leo-log/pom.xml
+mvn personal.leo:projectmeta-maven-plugin:step1 -f leo-metacenter/pom.xml
+mvn personal.leo:projectmeta-maven-plugin:step1 -f leo-oneid/pom.xml
+mvn personal.leo:projectmeta-maven-plugin:step1 -f leo-oneservice/pom.xml
+mvn personal.leo:projectmeta-maven-plugin:step1 -f leo-quasimodo/pom.xml
+mvn personal.leo:projectmeta-maven-plugin:step1 -f leo-rs/pom.xml
+mvn personal.leo:projectmeta-maven-plugin:step1 -f leo-voldemort/pom.xml
 
 
-mvn personal.leo:projectmeta-maven-plugin:step2 -f dataphin-auth/pom.xml -DappName=dataphin-auth
-mvn personal.leo:projectmeta-maven-plugin:step2 -f dataphin-benchmark/pom.xml -DappName=dataphin-benchmark
-mvn personal.leo:projectmeta-maven-plugin:step2 -f dataphin-blackbox/pom.xml -DappName=dataphin-blackbox
-mvn personal.leo:projectmeta-maven-plugin:step2 -f dataphin-bpms/pom.xml -DappName=dataphin-bpms
-mvn personal.leo:projectmeta-maven-plugin:step2 -f dataphin-dipmc/pom.xml -DappName=dataphin-dipmc
-mvn personal.leo:projectmeta-maven-plugin:step2 -f dataphin-ide/pom.xml -DappName=dataphin-ide
-mvn personal.leo:projectmeta-maven-plugin:step2 -f dataphin-log/pom.xml -DappName=dataphin-log
-mvn personal.leo:projectmeta-maven-plugin:step2 -f dataphin-metacenter/pom.xml -DappName=dataphin-metacenter
-mvn personal.leo:projectmeta-maven-plugin:step2 -f dataphin-oneid/pom.xml -DappName=dataphin-oneid
-mvn personal.leo:projectmeta-maven-plugin:step2 -f dataphin-oneservice/pom.xml -DappName=dataphin-oneservice
-mvn personal.leo:projectmeta-maven-plugin:step2 -f dataphin-quasimodo/pom.xml -DappName=dataphin-quasimodo
-mvn personal.leo:projectmeta-maven-plugin:step2 -f dataphin-rs/pom.xml -DappName=dataphin-rs
-mvn personal.leo:projectmeta-maven-plugin:step2 -f dataphin-voldemort/pom.xml -DappName=dataphin-voldemort
+mvn personal.leo:projectmeta-maven-plugin:step2 -f leo-auth/pom.xml -DappName=leo-auth
+mvn personal.leo:projectmeta-maven-plugin:step2 -f leo-benchmark/pom.xml -DappName=leo-benchmark
+mvn personal.leo:projectmeta-maven-plugin:step2 -f leo-blackbox/pom.xml -DappName=leo-blackbox
+mvn personal.leo:projectmeta-maven-plugin:step2 -f leo-bpms/pom.xml -DappName=leo-bpms
+mvn personal.leo:projectmeta-maven-plugin:step2 -f leo-dipmc/pom.xml -DappName=leo-dipmc
+mvn personal.leo:projectmeta-maven-plugin:step2 -f leo-ide/pom.xml -DappName=leo-ide
+mvn personal.leo:projectmeta-maven-plugin:step2 -f leo-log/pom.xml -DappName=leo-log
+mvn personal.leo:projectmeta-maven-plugin:step2 -f leo-metacenter/pom.xml -DappName=leo-metacenter
+mvn personal.leo:projectmeta-maven-plugin:step2 -f leo-oneid/pom.xml -DappName=leo-oneid
+mvn personal.leo:projectmeta-maven-plugin:step2 -f leo-oneservice/pom.xml -DappName=leo-oneservice
+mvn personal.leo:projectmeta-maven-plugin:step2 -f leo-quasimodo/pom.xml -DappName=leo-quasimodo
+mvn personal.leo:projectmeta-maven-plugin:step2 -f leo-rs/pom.xml -DappName=leo-rs
+mvn personal.leo:projectmeta-maven-plugin:step2 -f leo-voldemort/pom.xml -DappName=leo-voldemort
 
-mvn personal.leo:projectmeta-maven-plugin:step3 -f dataphin-auth/pom.xml -DappName=dataphin-auth
-mvn personal.leo:projectmeta-maven-plugin:step3 -f dataphin-benchmark/pom.xml -DappName=dataphin-benchmark
-mvn personal.leo:projectmeta-maven-plugin:step3 -f dataphin-blackbox/pom.xml -DappName=dataphin-blackbox
-mvn personal.leo:projectmeta-maven-plugin:step3 -f dataphin-bpms/pom.xml -DappName=dataphin-bpms
-mvn personal.leo:projectmeta-maven-plugin:step3 -f dataphin-dipmc/pom.xml -DappName=dataphin-dipmc
-mvn personal.leo:projectmeta-maven-plugin:step3 -f dataphin-ide/pom.xml -DappName=dataphin-ide
-mvn personal.leo:projectmeta-maven-plugin:step3 -f dataphin-log/pom.xml -DappName=dataphin-log
-mvn personal.leo:projectmeta-maven-plugin:step3 -f dataphin-metacenter/pom.xml -DappName=dataphin-metacenter
-mvn personal.leo:projectmeta-maven-plugin:step3 -f dataphin-oneid/pom.xml -DappName=dataphin-oneid
-mvn personal.leo:projectmeta-maven-plugin:step3 -f dataphin-oneservice/pom.xml -DappName=dataphin-oneservice
-mvn personal.leo:projectmeta-maven-plugin:step3 -f dataphin-quasimodo/pom.xml -DappName=dataphin-quasimodo
-mvn personal.leo:projectmeta-maven-plugin:step3 -f dataphin-rs/pom.xml -DappName=dataphin-rs
-mvn personal.leo:projectmeta-maven-plugin:step3 -f dataphin-voldemort/pom.xml -DappName=dataphin-voldemort
-
-
-mvn install -DskipTests -f dataphin-auth/pom.xml
-mvn install -DskipTests -f dataphin-benchmark/pom.xml
-mvn install -DskipTests -f dataphin-blackbox/pom.xml
-mvn install -DskipTests -f dataphin-bpms/pom.xml
-mvn install -DskipTests -f dataphin-dipmc/pom.xml
-mvn install -DskipTests -f dataphin-ide/pom.xml
-mvn install -DskipTests -f dataphin-log/pom.xml
-mvn install -DskipTests -f dataphin-metacenter/pom.xml
-mvn install -DskipTests -f dataphin-oneid/pom.xml
-mvn install -DskipTests -f dataphin-oneservice/pom.xml
-mvn install -DskipTests -f dataphin-quasimodo/pom.xml
-mvn install -DskipTests -f dataphin-rs/pom.xml
-mvn install -DskipTests -f dataphin-voldemort/pom.xml
+mvn personal.leo:projectmeta-maven-plugin:step3 -f leo-auth/pom.xml -DappName=leo-auth
+mvn personal.leo:projectmeta-maven-plugin:step3 -f leo-benchmark/pom.xml -DappName=leo-benchmark
+mvn personal.leo:projectmeta-maven-plugin:step3 -f leo-blackbox/pom.xml -DappName=leo-blackbox
+mvn personal.leo:projectmeta-maven-plugin:step3 -f leo-bpms/pom.xml -DappName=leo-bpms
+mvn personal.leo:projectmeta-maven-plugin:step3 -f leo-dipmc/pom.xml -DappName=leo-dipmc
+mvn personal.leo:projectmeta-maven-plugin:step3 -f leo-ide/pom.xml -DappName=leo-ide
+mvn personal.leo:projectmeta-maven-plugin:step3 -f leo-log/pom.xml -DappName=leo-log
+mvn personal.leo:projectmeta-maven-plugin:step3 -f leo-metacenter/pom.xml -DappName=leo-metacenter
+mvn personal.leo:projectmeta-maven-plugin:step3 -f leo-oneid/pom.xml -DappName=leo-oneid
+mvn personal.leo:projectmeta-maven-plugin:step3 -f leo-oneservice/pom.xml -DappName=leo-oneservice
+mvn personal.leo:projectmeta-maven-plugin:step3 -f leo-quasimodo/pom.xml -DappName=leo-quasimodo
+mvn personal.leo:projectmeta-maven-plugin:step3 -f leo-rs/pom.xml -DappName=leo-rs
+mvn personal.leo:projectmeta-maven-plugin:step3 -f leo-voldemort/pom.xml -DappName=leo-voldemort
 
 
-mvnDebug personal.leo:projectmeta-maven-plugin:step3 -f dataphin-auth/pom.xml -DappName=dataphin-auth
+mvn install -DskipTests -f leo-auth/pom.xml
+mvn install -DskipTests -f leo-benchmark/pom.xml
+mvn install -DskipTests -f leo-blackbox/pom.xml
+mvn install -DskipTests -f leo-bpms/pom.xml
+mvn install -DskipTests -f leo-dipmc/pom.xml
+mvn install -DskipTests -f leo-ide/pom.xml
+mvn install -DskipTests -f leo-log/pom.xml
+mvn install -DskipTests -f leo-metacenter/pom.xml
+mvn install -DskipTests -f leo-oneid/pom.xml
+mvn install -DskipTests -f leo-oneservice/pom.xml
+mvn install -DskipTests -f leo-quasimodo/pom.xml
+mvn install -DskipTests -f leo-rs/pom.xml
+mvn install -DskipTests -f leo-voldemort/pom.xml
 
-cd ~/gitRepo/repo-ali/dataphin/apps/
+
+mvnDebug personal.leo:projectmeta-maven-plugin:step3 -f leo-auth/pom.xml -DappName=leo-auth
+
+cd ~/gitRepo/repo-ali/leo/apps/
 
