@@ -56,7 +56,7 @@ public class Step3Mojo extends AbstractMojo {
 
     @Parameter(property = "appName")
     private String appName;
-    @Parameter(property = "productName", defaultValue = "dataphin")
+    @Parameter(property = "productName")
     private String productName;
 
     private static ClassRelation classRelation;
@@ -68,6 +68,9 @@ public class Step3Mojo extends AbstractMojo {
     @Override
     public void execute() {
         try {
+            if (StringUtils.isBlank(productName)) {
+                throw new RuntimeException("add mvn param: -DappName=value");
+            }
             if (StringUtils.isBlank(appName)) {
                 throw new RuntimeException("add mvn param: -DappName=value");
             }
