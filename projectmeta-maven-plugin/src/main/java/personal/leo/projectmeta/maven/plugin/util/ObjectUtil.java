@@ -19,7 +19,7 @@ import org.apache.commons.io.IOUtils;
  */
 public class ObjectUtil {
 
-    public static <T> T readJsonObject(String filepath, Class<T> clz) throws IOException {
+    public synchronized static <T> T readJsonObject(String filepath, Class<T> clz) throws IOException {
         final File file = new File(filepath);
         if (file.exists()) {
             @Cleanup
@@ -31,7 +31,7 @@ public class ObjectUtil {
         }
     }
 
-    public static <T> List<T> readJsonList(String filepath, Class<T> clz) throws IOException {
+    public synchronized static <T> List<T> readJsonList(String filepath, Class<T> clz) throws IOException {
         final File file = new File(filepath);
         if (file.exists()) {
             @Cleanup
@@ -43,7 +43,11 @@ public class ObjectUtil {
         }
     }
 
-    public static void writeJson(String filepath, Object obj) throws IOException {
+    public synchronized static void writeJson(String filepath, Object obj) throws IOException {
+        final File file = new File(filepath);
+        if (!file.getParentFile().exists()) {
+            file.getParentFile().mkdirs();
+        }
         final FileOutputStream fos = new FileOutputStream(filepath);
         IOUtils.write(JSON.toJSONString(obj), fos, StandardCharsets.UTF_8);
     }

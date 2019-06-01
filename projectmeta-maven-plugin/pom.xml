@@ -12,6 +12,7 @@
     <artifactId>projectmeta-maven-plugin</artifactId>
     <packaging>maven-plugin</packaging>
 
+
     <dependencies>
 
         <dependency>
@@ -30,6 +31,13 @@
             <artifactId>maven-core</artifactId>
             <version>3.6.1</version>
         </dependency>
+        <dependency>
+            <groupId>com.github.javaparser</groupId>
+            <artifactId>javaparser-symbol-solver-core</artifactId>
+            <version>3.14.2</version>
+        </dependency>
+
+
     </dependencies>
 
     <build>

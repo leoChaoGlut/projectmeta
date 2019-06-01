@@ -1,1 +1,2 @@
-step1: 与 dependency:list 效果类似,将项目依赖的所有jar local repo path存储下来
+step1: install
+step2: 与 dependency:list 效果类似,将项目依赖的所有jar local repo path存储下来

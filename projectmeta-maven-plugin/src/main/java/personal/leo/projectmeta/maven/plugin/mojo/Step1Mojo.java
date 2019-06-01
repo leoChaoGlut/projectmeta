@@ -27,7 +27,7 @@ import personal.leo.projectmeta.maven.plugin.util.ObjectUtil;
 /**
  * @author 谦扬
  * @date 2019-05-21
- * 落盘工程所需的jar
+ * 存储工程所需的jar
  */
 @Mojo(name = Step._1)
 public class Step1Mojo extends AbstractMojo {
@@ -77,20 +77,24 @@ public class Step1Mojo extends AbstractMojo {
 
             rootNode.accept(visitor);
 
-            final Set<String> jarPaths = JarPathHolder.getAbsoluteJarPaths();
-
-            final List<String> existsJarPaths = ObjectUtil.readJsonList(
-                OutputPath.JAR_PATH_JSON_FOR_JAVA_PARSER,
-                String.class
-            );
-
-            jarPaths.addAll(existsJarPaths);
-
-            ObjectUtil.writeJson(OutputPath.JAR_PATH_JSON_FOR_JAVA_PARSER, jarPaths);
+            mergeJarPath();
 
         } catch (DependencyGraphBuilderException | IOException exception) {
             throw new MojoExecutionException("Cannot build project dependency graph", exception);
         }
+    }
+
+    private void mergeJarPath() throws IOException {
+        final Set<String> jarPaths = JarPathHolder.getAbsoluteJarPaths();
+
+        final List<String> existsJarPaths = ObjectUtil.readJsonList(
+            OutputPath.JAR_PATH_JSON_FOR_JAVA_PARSER,
+            String.class
+        );
+
+        jarPaths.addAll(existsJarPaths);
+
+        ObjectUtil.writeJson(OutputPath.JAR_PATH_JSON_FOR_JAVA_PARSER, jarPaths);
     }
 
     private ArtifactFilter createResolvingArtifactFilter() {

@@ -32,11 +32,6 @@ import personal.leo.projectmeta.maven.plugin.dependency.visitor.DependencyNodeVi
  * Default implementation of a DependencyNode.
  */
 public class Step1DependencyNode implements DependencyNode {
-    public static final String JAVA_FILE_SUFFIX = ".java";
-    public static final String JAR_FILE_SUFFIX = ".jar";
-    public static final String SOURCES_ROOT_DIR_PATH = "/src/main/java";
-    public static final String PACKAGE_SEPARATOR = ".";
-    public static final String POM = "pom";
 
     private final Artifact artifact;
 
