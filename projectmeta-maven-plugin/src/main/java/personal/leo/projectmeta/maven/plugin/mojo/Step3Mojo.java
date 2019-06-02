@@ -51,17 +51,21 @@ public class Step3Mojo extends AbstractMojo {
     @Parameter(defaultValue = "${project}", readonly = true, required = true)
     private MavenProject module;
 
-    public static final String ALIBABA_PACKAGE_PREFIX = "com.alibaba";
     public static final String PARSE_ERROR_JSON_FILE_PATH_TMPL = "/tmp/projectMeta/parseError/%s.json";
 
+    /**
+     * 过滤前缀,具体过滤逻辑请看代码
+     */
+    @Parameter(property = "packagePrefix")
+    private String packagePrefix;
     @Parameter(property = "appName")
     private String appName;
     @Parameter(property = "productName")
     private String productName;
 
-    private static ClassRelation classRelation;
     private static String staticProductName;
     private static String staticAppName;
+    private static String staticPackagePrefix;
     private static String moduleId;
     private static MetaIndex index;
 
@@ -69,10 +73,13 @@ public class Step3Mojo extends AbstractMojo {
     public void execute() {
         try {
             if (StringUtils.isBlank(productName)) {
-                throw new RuntimeException("add mvn param: -DappName=value");
+                throw new RuntimeException("add mvn param: -DproductName=value");
             }
             if (StringUtils.isBlank(appName)) {
                 throw new RuntimeException("add mvn param: -DappName=value");
+            }
+            if (StringUtils.isBlank(packagePrefix)) {
+                throw new RuntimeException("add mvn param: -DpackagePrefix=value");
             }
 
             index = ObjectUtil.readJsonObject(OutputPath.META_INDEX_JSON_FILE_PATH, MetaIndex.class);
@@ -83,6 +90,7 @@ public class Step3Mojo extends AbstractMojo {
             if (packagingIsNotPom(module)) {
                 staticProductName = productName;
                 staticAppName = appName;
+                staticPackagePrefix = packagePrefix;
 
                 moduleId = ModuleUtil.buildModuleId(module);
 
@@ -161,8 +169,8 @@ public class Step3Mojo extends AbstractMojo {
                 final String toClass = reference.getCorrespondingDeclaration().declaringType().getQualifiedName();
                 final String toMethod = methodCall.getName().getId();
 
-                if (fromClass.startsWith(ALIBABA_PACKAGE_PREFIX)
-                    && toClass.startsWith(ALIBABA_PACKAGE_PREFIX)
+                if (fromClass.startsWith(staticPackagePrefix)
+                    && toClass.startsWith(staticPackagePrefix)
                     && !fromClass.equals(toClass)
                 ) {
                     String toModule = index.getModuleByClass(toClass);
@@ -185,7 +193,7 @@ public class Step3Mojo extends AbstractMojo {
                 }
 
             } catch (Exception e) {
-                if (fromClass.startsWith(ALIBABA_PACKAGE_PREFIX)) {
+                if (fromClass.startsWith(staticPackagePrefix)) {
                     final String errMsg = e.getMessage();
                     if (errMsg != null) {
                         parseError

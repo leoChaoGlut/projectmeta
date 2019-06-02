@@ -11,6 +11,7 @@
     <modules>
         <module>projectmeta-maven-plugin</module>
         <module>projectmeta-executor</module>
+        <module>projectmeta-test-example</module>
     </modules>
 
     <dependencies>

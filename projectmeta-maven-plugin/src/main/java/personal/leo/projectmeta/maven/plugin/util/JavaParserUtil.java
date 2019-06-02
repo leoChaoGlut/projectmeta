@@ -9,6 +9,7 @@ import com.github.javaparser.symbolsolver.resolution.typesolvers.CombinedTypeSol
 import com.github.javaparser.symbolsolver.resolution.typesolvers.JarTypeSolver;
 import com.github.javaparser.symbolsolver.resolution.typesolvers.ReflectionTypeSolver;
 import lombok.Getter;
+import org.apache.commons.collections4.CollectionUtils;
 import personal.leo.projectmeta.maven.plugin.constants.OutputPath;
 
 /**
@@ -38,14 +39,16 @@ public class JavaParserUtil {
                 }
             }
 
-            System.err.println("======not found jars as bellow======");
-            System.err.println(String.join("\n", notFoundJars));
-            System.err.println("======not found jars as above======");
+            if (CollectionUtils.isNotEmpty(notFoundJars)) {
+                System.err.println("======not found jars as bellow======");
+                System.err.println(String.join("\n", notFoundJars));
+                System.err.println("======not found jars as above======");
 
-            ObjectUtil.writeJson(
-                OutputPath.NOT_FOUND_JARS_JSON_FILE_PATH,
-                notFoundJars
-            );
+                ObjectUtil.writeJson(
+                    OutputPath.NOT_FOUND_JARS_JSON_FILE_PATH,
+                    notFoundJars
+                );
+            }
 
             javaParserFacade = JavaParserFacade.get(combinedTypeSolver);
 

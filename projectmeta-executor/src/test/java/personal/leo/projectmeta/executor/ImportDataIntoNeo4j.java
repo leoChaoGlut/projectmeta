@@ -1,4 +1,4 @@
-package personal.leo.projectmeta;
+package personal.leo.projectmeta.executor;
 
 import java.io.IOException;
 import java.util.List;
@@ -46,6 +46,7 @@ public class ImportDataIntoNeo4j {
     public void buildNodes() throws IOException {
         final MetaIndex index = ObjectUtil.readJsonObject(OutputPath.META_INDEX_JSON_FILE_PATH, MetaIndex.class);
 
+        productMapApp();
         appMapModule(index);
         moduleMapPackage(index);
         packageMapClass(index);
@@ -94,6 +95,16 @@ public class ImportDataIntoNeo4j {
 
     }
 
+    private void productMapApp() {
+        String cql = "MATCH(p:Product{name:'example-1'}) "
+            + "MATCH(a1:App{name:'component-a'}) "
+            + "MATCH(a2:App{name:'component-b'}) "
+            + "MERGE(a1)-[:BELONG_TO]->(p) "
+            + "MERGE(a2)-[:BELONG_TO]->(p) ";
+
+        runCql(cql);
+    }
+
     private void packageMapClass(MetaIndex index) {
         index.getPackageMapClasses().forEach((pkg, classes) -> {
             StringBuilder cql = new StringBuilder();
@@ -136,8 +147,12 @@ public class ImportDataIntoNeo4j {
         });
     }
 
-    private StatementResult runCql(String cql) {
-        return driver.session().run(cql);
+    private void runCql(String cql) {
+        System.out.println(cql);
+        final StatementResult result = driver.session().run(cql);
+        while (result.hasNext()) {
+            System.out.println(result.next());
+        }
     }
 
 }

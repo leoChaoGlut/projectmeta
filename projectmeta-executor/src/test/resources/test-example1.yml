@@ -1,0 +1,12 @@
+step1: 清理/tmp/projectMeta
+step2: 给example1打包 mvn install
+step3: 在example1目录下执行 mvn personal.leo:projectmeta-maven-plugin:step1 -f projectmeta-test-example-1/pom.xml
+step4: 给example1的component-a和component-b分别执行下面命令
+  - mvn personal.leo:projectmeta-maven-plugin:step2 -f ../projectmeta-test-example/projectmeta-test-example-1/component-a/pom.xml -DappName=component-a
+  - mvn personal.leo:projectmeta-maven-plugin:step2 -f ../projectmeta-test-example/projectmeta-test-example-1/component-b/pom.xml -DappName=component-b
+step5: 给example1的component-a和component-b分别执行下面命令
+  - mvn personal.leo:projectmeta-maven-plugin:step3 -f ../projectmeta-test-example/projectmeta-test-example-1/component-a/pom.xml -DappName=component-a -DproductName=example-1 -DpackagePrefix=personal.leo
+  - mvn personal.leo:projectmeta-maven-plugin:step3 -f ../projectmeta-test-example/projectmeta-test-example-1/component-b/pom.xml -DappName=component-b -DproductName=example-1 -DpackagePrefix=personal.leo
+
+
+  mvnDebug personal.leo:projectmeta-maven-plugin:step3 -f ../projectmeta-test-example/projectmeta-test-example-1/component-b/pom.xml -DappName=component-b -DproductName=example-1
