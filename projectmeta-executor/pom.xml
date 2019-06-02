@@ -24,11 +24,12 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
+
     <build>
         <plugins>
             <plugin>
                 <groupId>personal.leo</groupId>
-                <artifactId>projectmeta-test-example</artifactId>
+                <artifactId>projectmeta-maven-plugin</artifactId>
                 <version>1.0-SNAPSHOT</version>
             </plugin>
         </plugins>

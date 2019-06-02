@@ -12,6 +12,8 @@
         <module>projectmeta-maven-plugin</module>
         <module>projectmeta-executor</module>
         <module>projectmeta-test-example</module>
+        <module>projectmeta-evaluation</module>
+        <module>projectmeta-neo4j-procedure</module>
     </modules>
 
     <dependencies>
@@ -62,7 +64,6 @@
                     <target>1.8</target>
                 </configuration>
             </plugin>
-
         </plugins>
     </build>
 </project>
