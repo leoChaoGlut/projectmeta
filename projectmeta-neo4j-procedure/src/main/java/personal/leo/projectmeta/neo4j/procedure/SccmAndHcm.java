@@ -36,6 +36,28 @@ public class SccmAndHcm {
     private static final String NAME = "name";
     private static final String APP = "app";
 
+    @Procedure(value = "SccmAndHcm.scoreOfAllApps")
+    public Stream<Score> scoreOfAllApps() {
+        final String cql = "MATCH(a:App) RETURN a.name AS appName";
+        return db.execute(cql, new HashMap<>())
+            .stream()
+            .map(entry -> {
+                final String appName = (String)entry.get("appName");
+                return score(appName).findFirst().get();
+            });
+    }
+
+    @Procedure(value = "SccmAndHcm.processDataOfAllApps")
+    public Stream<ProcessData> processDataOfAllApps() {
+        final String cql = "MATCH(a:App) RETURN a.name AS appName";
+        return db.execute(cql, new HashMap<>())
+            .stream()
+            .map(entry -> {
+                final String appName = (String)entry.get("appName");
+                return processData(appName).findFirst().get();
+            });
+    }
+
     @Procedure(value = "SccmAndHcm.score")
     public Stream<Score> score(
         @Name(APP) String app
@@ -53,7 +75,7 @@ public class SccmAndHcm {
         );
         final Double hcmScore = Hcm.calc(processData.relationsCountInApp, processData.appRelationCount);
 
-        scores.add(new Score(sccmScore, hcmScore));
+        scores.add(new Score(app, sccmScore, hcmScore));
 
         return scores.stream();
 
@@ -90,6 +112,7 @@ public class SccmAndHcm {
             final Long appRelationCount = calcAppRelationCount(app);
 
             final ProcessData processData = new ProcessData(
+                app,
                 havingDirectRelationsCount,
                 havingNoDirectRelationsCount,
                 relationsCountInApp.get(),
@@ -192,13 +215,15 @@ public class SccmAndHcm {
     }
 
     public static class ProcessData {
+        public String appName;
         public long havingDirectRelationCount;
         public long havingNoDirectRelationCount;
         public long relationsCountInApp;
         public long appRelationCount;
 
-        public ProcessData(long havingDirectRelationCount, long havingNoDirectRelationCount, long relationsCountInApp,
-            long appRelationCount) {
+        public ProcessData(String appName, long havingDirectRelationCount, long havingNoDirectRelationCount,
+            long relationsCountInApp, long appRelationCount) {
+            this.appName = appName;
             this.havingDirectRelationCount = havingDirectRelationCount;
             this.havingNoDirectRelationCount = havingNoDirectRelationCount;
             this.relationsCountInApp = relationsCountInApp;
@@ -227,10 +252,12 @@ public class SccmAndHcm {
     }
 
     public static class Score {
+        public String appName;
         public double sccm;
         public double hcm;
 
-        public Score(double sccm, double hcm) {
+        public Score(String appName, double sccm, double hcm) {
+            this.appName = appName;
             this.sccm = sccm;
             this.hcm = hcm;
         }

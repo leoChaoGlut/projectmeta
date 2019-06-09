@@ -103,6 +103,8 @@ public class ImportDataIntoNeo4j {
             + "MERGE(a2)-[:BELONG_TO]->(p) ";
 
         runCql(cql);
+
+        System.out.println("after productMapApp");
     }
 
     private void packageMapClass(MetaIndex index) {
@@ -111,12 +113,23 @@ public class ImportDataIntoNeo4j {
 
             cql.append(String.format("MERGE(p:Package{name:'%s'})\n", pkg))
                 .append("WITH p \n");
-            classes.forEach(clz -> {
-                cql.append(String.format("MERGE(:Class{name:'%s'})-[:BELONG_TO]->(p)\n", clz));
-            });
+
+            int i = 0;
+            for (String clz : classes) {
+                cql.append(String.format("MERGE(c%s:Class{name:'%s'})\n", i, clz));
+                i++;
+            }
+
+            i = 0;
+            for (String clz : classes) {
+                cql.append(String.format("MERGE(c%s)-[:BELONG_TO]->(p)\n", i));
+                i++;
+            }
 
             runCql(cql.toString());
         });
+
+        System.out.println("after packageMapClass");
     }
 
     private void moduleMapPackage(MetaIndex index) {
@@ -125,12 +138,22 @@ public class ImportDataIntoNeo4j {
 
             cql.append(String.format("MERGE(m:Module{name:'%s'})\n", module))
                 .append("WITH m \n");
-            packages.forEach(pkg -> {
-                cql.append(String.format("MERGE(:Package{name:'%s'})-[:BELONG_TO]->(m)\n", pkg));
-            });
+            int i = 0;
+            for (String pkg : packages) {
+                cql.append(String.format("MERGE(p%s:Package{name:'%s'})\n", i, pkg));
+                i++;
+            }
+
+            i = 0;
+            for (String pkg : packages) {
+                cql.append(String.format("MERGE(p%s)-[:BELONG_TO]->(m)\n", i));
+                i++;
+            }
 
             runCql(cql.toString());
         });
+
+        System.out.println("after moduleMapPackage");
     }
 
     private void appMapModule(MetaIndex index) {
@@ -145,6 +168,8 @@ public class ImportDataIntoNeo4j {
 
             runCql(cql.toString());
         });
+
+        System.out.println("after appMapModule");
     }
 
     private void runCql(String cql) {
