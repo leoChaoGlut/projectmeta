@@ -69,16 +69,36 @@ public class SccmAndHcm {
             throw new RuntimeException("processData is null");
         }
 
+        long classCount = countClass(app);
+
         final Double sccmScore = Sccm.calc(
             processData.havingNoDirectRelationCount,
             processData.havingDirectRelationCount
         );
-        final Double hcmScore = Hcm.calc(processData.relationsCountInApp, processData.appRelationCount);
+        final String sccmLevel = Sccm.level(sccmScore, classCount);
 
-        scores.add(new Score(app, sccmScore, hcmScore));
+        final Double hcmScore = Hcm.calc(processData.relationsCountInApp, processData.appRelationCount);
+        final String hcmLevel = Hcm.level(hcmScore);
+
+        scores.add(new Score(app, sccmScore, hcmScore, sccmLevel, hcmLevel));
 
         return scores.stream();
 
+    }
+
+    private long countClass(String app) {
+        final String cql = String.format(
+            "MATCH(:App {name: '%s'})<-[:BELONG_TO]-"
+                + "(:Module)<-[:BELONG_TO]-"
+                + "(:Package)<-[:BELONG_TO]-"
+                + "(c:Class)\n"
+                + "RETURN count(c) AS classCount",
+            app
+        );
+
+        return db.execute(cql, new HashMap<>())
+            .map(entry -> (long)entry.get("classCount"))
+            .next();
     }
 
     @Procedure(value = "SccmAndHcm.processData")
@@ -239,6 +259,34 @@ public class SccmAndHcm {
             return 1.0 * qr / (qr + pr);
         }
 
+        public static String level(Double score, long classCount) {
+            final int sccmThreshold = 6;
+            double n = 1.0 * classCount;
+            if (classCount >= sccmThreshold) {
+                if (2.0 / n <= score && score <= (16 + 2.0 * n) / (n * (n - 1))) {
+                    return "Good: Simple module with low complexity and good cohesion: 2/N<=SCCM<=16+2N/N(N-1)";
+                } else if ((16 + 2.0 * n) / (n * (n - 1)) <= score && score <= (36 + 2.0 * n) / (n * (n - 1))) {
+                    return "Acceptable: Good cohesion,but a little complex: 16+2N/N(N-1)<=SCCM<=36+2N/N(N-1)";
+                } else if (score <= 2.0 / n) {
+                    return "Bad: Very low cohesion and low complexity: SCC<=2/N";
+                } else if (score >= (36 + 2.0 * n) / (n * (n - 1))) {
+                    return "Bad: High cohesion,but too complex: SCC>=36+2N/N(N-1)";
+                } else {
+                    return "score is illgal:" + score;
+                }
+            } else {
+                if (0.66f < score && score <= 1) {
+                    return "Good (0.66,1]";
+                } else if (0.5f <= score && score <= 0.66f) {
+                    return "Acceptable [0.5,0.66]";
+                } else if (0 <= score && score < 0.5f) {
+                    return "Acceptable [0.5,0.66]";
+                } else {
+                    return "score is illgal:" + score;
+                }
+            }
+        }
+
     }
 
     public static class Hcm {
@@ -249,17 +297,34 @@ public class SccmAndHcm {
             return 1.0 * qrcomk / (qrcomk + orcomk);
         }
 
+        public static String level(Double score) {
+            if (0.5f <= score && score < 1) {
+                return "Good [0.5,1)";
+            } else if (0.33f <= score && score < 0.5f) {
+                return "Acceptable [0.33,0.5)";
+            } else if (0 <= score && score < 0.33f) {
+                return "Bad(Low cohesion) [0,0.33)";
+            } else if (score == 1) {
+                return "Bad(The Component is useless) 1";
+            } else {
+                return "score is illgal:" + score;
+            }
+        }
     }
 
     public static class Score {
         public String appName;
         public double sccm;
         public double hcm;
+        public String sccmLevel;
+        public String hcmLevel;
 
-        public Score(String appName, double sccm, double hcm) {
+        public Score(String appName, double sccm, double hcm, String sccmLevel, String hcmLevel) {
             this.appName = appName;
             this.sccm = sccm;
             this.hcm = hcm;
+            this.sccmLevel = sccmLevel;
+            this.hcmLevel = hcmLevel;
         }
     }
 

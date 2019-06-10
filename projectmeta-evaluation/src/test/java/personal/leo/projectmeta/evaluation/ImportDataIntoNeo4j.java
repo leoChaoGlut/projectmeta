@@ -1,4 +1,4 @@
-package personal.leo.projectmeta.executor;
+package personal.leo.projectmeta.evaluation;
 
 import java.io.IOException;
 import java.util.List;
@@ -111,8 +111,8 @@ public class ImportDataIntoNeo4j {
         index.getPackageMapClasses().forEach((pkg, classes) -> {
             StringBuilder cql = new StringBuilder();
 
-            cql.append(String.format("MERGE(p:Package{name:'%s'})\n", pkg))
-                .append("WITH p \n");
+            cql.append(String.format("MERGE(p:Package{name:'%s'})\n", pkg));
+            //.append("WITH p \n");
 
             int i = 0;
             for (String clz : classes) {
@@ -136,8 +136,8 @@ public class ImportDataIntoNeo4j {
         index.getModuleMapPackages().forEach((module, packages) -> {
             StringBuilder cql = new StringBuilder();
 
-            cql.append(String.format("MERGE(m:Module{name:'%s'})\n", module))
-                .append("WITH m \n");
+            cql.append(String.format("MERGE(m:Module{name:'%s'})\n", module));
+            //.append("WITH m \n");
             int i = 0;
             for (String pkg : packages) {
                 cql.append(String.format("MERGE(p%s:Package{name:'%s'})\n", i, pkg));
@@ -160,8 +160,8 @@ public class ImportDataIntoNeo4j {
         index.getAppMapModules().forEach((app, modules) -> {
             StringBuilder cql = new StringBuilder();
 
-            cql.append(String.format("MERGE(a:App{name:'%s'})\n", app))
-                .append("WITH a \n");
+            cql.append(String.format("MERGE(a:App{name:'%s'})\n", app));
+            //.append("WITH a \n");
             modules.forEach(module ->
                 cql.append(String.format("MERGE(:Module{name:'%s'})-[:BELONG_TO]->(a)\n", module))
             );

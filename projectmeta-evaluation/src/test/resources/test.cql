@@ -12,6 +12,8 @@ MATCH p = (c1:Class)-[c:CALL]-(c2:Class)
 RETURN p
 ;
 
+MATCH(:App {name: 'component-a'})<-[:BELONG_TO]-(:Module)<-[:BELONG_TO]-(:Package)<-[:BELONG_TO]-(c:Class)
+RETURN count(c);
 
 MATCH(a:App {name: 'component-a'})
 MATCH p = (ac:Class)-[c:CALL]-(oc:Class)
