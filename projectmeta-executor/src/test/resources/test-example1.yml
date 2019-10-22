@@ -10,3 +10,5 @@ step5: 给example1的component-a和component-b分别执行下面命令
 
 
   mvnDebug personal.leo:projectmeta-maven-plugin:step3 -f ../projectmeta-test-example/projectmeta-test-example-1/component-b/pom.xml -DappName=component-b -DproductName=example-1
+  
+step6: 将生成好的元数据导入到neo4j分析,请看personal.leo.projectmeta.evaluation.ImportDataIntoNeo4j
