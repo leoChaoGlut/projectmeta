@@ -1,7 +1,9 @@
 package personal.leo.projectmeta.maven.plugin.index;
 
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 import lombok.experimental.Accessors;
 
 /**
@@ -11,6 +13,8 @@ import lombok.experimental.Accessors;
 @Getter
 @Setter
 @Accessors(chain = true)
+@ToString
+@EqualsAndHashCode
 public class ClassRelation {
     private String fromProduct;
     private String fromApp;
