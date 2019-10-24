@@ -5,5 +5,12 @@
 ### 例子请看: 
   ./projectmeta-executor/src/test/resources/test-example1.yml
 
-### 局限性: 
-  链式调用无法解析,如 ObjectUtils.getObject().execute() ,getObject() 的返回值如果是其它模块的类,则无法被解析
+### 特殊依赖:
+```
+<dependency>
+    <groupId>com.github.javaparser</groupId>
+    <artifactId>javaparser-symbol-solver-core</artifactId>
+    <version>3.15.3-SNAPSHOT-leo</version>
+</dependency>
+```
+see https://github.com/leoChaoGlut/javaparser
