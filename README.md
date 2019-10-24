@@ -5,7 +5,7 @@
 ### 例子请看: 
   ./projectmeta-executor/src/test/resources/test-example1.yml
 
-### 特殊依赖:
+### 特殊依赖: (解决无法解析链式调用的问题)
 ```
 <dependency>
     <groupId>com.github.javaparser</groupId>
