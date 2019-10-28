@@ -15,7 +15,7 @@
 ```
 see https://github.com/leoChaoGlut/javaparser
 
-### 局限性
-1.无法解析链式调用的问题,已提交PR给javaparser,fixed
+### JavaParser局限性
+~~1.无法解析链式调用的问题,已提交PR给javaparser,fixed~~
 
 2.无法解析方法块内的lambda子块的方法调用
